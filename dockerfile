@@ -1,17 +1,22 @@
-# Use an official Python runtime as the base image
+# Use Python base image
 FROM python:3.9
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy necessary files
+COPY requirements.txt requirements.txt
+COPY app.py app.py
+COPY templates templates
+COPY static static
+COPY inventory.csv inventory.csv
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Expose port 5000 (Flask default)
+# Expose port
 EXPOSE 5000
 
-# Command to run the Flask app
-CMD ["python", "app.py"]
+# Run the application
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+
