@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy necessary files
 COPY requirements.txt requirements.txt
-COPY app.py app.py
+COPY appp.py appp.py
 COPY templates templates
 COPY static static
 COPY inventory.csv inventory.csv
